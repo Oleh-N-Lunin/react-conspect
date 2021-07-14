@@ -3,14 +3,13 @@ import React, { Component } from "react";
 class Counter extends Component{
     static defaultProps = {
         step: 1,
-    }
+        initialValue: 0,
+    };
 
-    constructor() {
-        super();
+    state = {
+        value: this.props.initialValue,
+    };
 
-        // this.handleIncrement = this.handleIncrement.bind(this);
-        // this.handleDecrement = this.handleDecrement.bind(this);
-    }
 
     handleIncrement = evt => {
         console.log("increment button was clicked!", evt);
@@ -27,7 +26,7 @@ class Counter extends Component{
 
         return (
             <div>
-                <span>0</span>
+                <span>{this.state.value}</span>
                 <button type="button" onClick={this.handleIncrement}>Increment by {step}</button>
                 <button type="button" onClick={this.handleDecrement}>Decrement by {step}</button>
             </div>
