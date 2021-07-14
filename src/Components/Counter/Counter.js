@@ -8,16 +8,16 @@ class Counter extends Component{
     constructor() {
         super();
 
-        this.handleIncrement = this.handleIncrement.bind(this);
-        this.handleDecrement = this.handleDecrement.bind(this);
+        // this.handleIncrement = this.handleIncrement.bind(this);
+        // this.handleDecrement = this.handleDecrement.bind(this);
     }
 
-    handleIncrement(evt) {
+    handleIncrement = evt => {
         console.log("increment button was clicked!", evt);
         console.log('this.props: ', this.props);
     }
 
-    handleDecrement(evt) {
+    handleDecrement = evt => {
         console.log("Decrement button was clicked!", evt);
         console.log("this.props: ", this.props);
     }
