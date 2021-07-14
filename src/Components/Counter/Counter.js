@@ -10,16 +10,13 @@ class Counter extends Component{
         value: this.props.initialValue,
     };
 
+    handleIncrement = () => {
+        this.setState((state, props) => ({ value: state.value + props.step, }));
+    };
 
-    handleIncrement = evt => {
-        console.log("increment button was clicked!", evt);
-        console.log('this.props: ', this.props);
-    }
-
-    handleDecrement = evt => {
-        console.log("Decrement button was clicked!", evt);
-        console.log("this.props: ", this.props);
-    }
+    handleDecrement = () => {
+    this.setState((state, props) => ({ value: state.value - props.step, }));
+    };
 
     render() {
         const { step } = this.props;
