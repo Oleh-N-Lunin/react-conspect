@@ -21,20 +21,8 @@ class Counter extends Component{
         return (
             <div>
                 <span>0</span>
-                <button
-                    type="button"
-                    onClick={evt => {
-                        console.log("increment button was clicked!", evt);
-                        console.log('this.props: ', this.props);
-                    }}    
-                >Increment by {step}</button>
-                <button
-                    type="button"
-                    onClick={evt => {
-                        console.log("Decrement button was clicked", evt);
-                        console.log("this.props: ", this.props);
-                    }}
-                >Decrement by {step}</button>
+                <button type="button" onClick={this.handleIncrement.bind(this)}>Increment by {step}</button>
+                <button type="button" onClick={this.handleDecrement.bind(this)}>Decrement by {step}</button>
             </div>
         );
     }
