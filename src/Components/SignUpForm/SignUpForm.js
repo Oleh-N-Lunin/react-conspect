@@ -4,22 +4,23 @@ const INITIAL_STATE = {
     login: '',
     email: '',
     password: '',
+    agreed: false,
 };
 
 class SignUpForm extends Component {
     state = { ...INITIAL_STATE };
 
     handleChange = ({ target }) => {
-        const { name, value } = target;
-        this.setState({ [name]: value });
+        const { name, value, type, checked } = target;
+        this.setState({ [name]: type === 'checkbox'? checked:value });
     };
 
-    handleSubmit = evt => {
-        evt.preventDefault();
+    handleSubmit = e => {
+        e.preventDefault();
 
-        const { login, email, password } = this.state;
+        const { login, email, password, agreed } = this.state;
 
-        console.log(`Login: ${login} Email: ${email} Password ${password}`);
+        console.log(`Login: ${login} Email: ${email} Password ${password} Agreed: ${agreed}`);
 
         this.props.onSubmit({ ...this.state });
         this.reset();
@@ -28,7 +29,7 @@ class SignUpForm extends Component {
     reset = () => { this.setState({ ...INITIAL_STATE }) };
 
     render() {
-        const { login, email, password } = this.state;
+        const { login, email, password, agreed } = this.state;
 
         return (
             <form onSubmit={this.handleSubmit}>
@@ -59,6 +60,14 @@ class SignUpForm extends Component {
                         placeholder="Enter password"
                         name="password"
                         value={password}
+                        onChange={this.handleChange}
+                    />
+                </label>
+                <label>
+                    Agree to terms
+                    <input
+                        type="checkbox"
+                        checked={agreed}
                         onChange={this.handleChange}
                     />
                 </label>
