@@ -1,14 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
+
+const Gender = {
+    MALE: 'male',
+    FEMALE: 'female',
+}
 
 const INITIAL_STATE = {
     login: '',
     email: '',
     password: '',
     agreed: false,
+    gender: null,
 };
 
-class SignUpForm extends Component {
-    state = { ...INITIAL_STATE };
+class SignUpForm extends React.Component {
+    state = {
+        ...INITIAL_STATE,
+    };
 
     handleChange = ({ target }) => {
         const { name, value, type, checked } = target;
@@ -18,9 +26,15 @@ class SignUpForm extends Component {
     handleSubmit = e => {
         e.preventDefault();
 
-        const { login, email, password, agreed } = this.state;
+        const { login, email, password, agreed, gender } = this.state;
 
-        console.log(`Login: ${login} Email: ${email} Password ${password} Agreed: ${agreed}`);
+        console.log(`
+        Login: ${login} 
+        Email: ${email} 
+        Password ${password} 
+        Agreed: ${agreed} 
+        Gender: ${gender}
+        `);
 
         this.props.onSubmit({ ...this.state });
         this.reset();
@@ -29,7 +43,7 @@ class SignUpForm extends Component {
     reset = () => { this.setState({ ...INITIAL_STATE }) };
 
     render() {
-        const { login, email, password, agreed } = this.state;
+        const { login, email, password, agreed, gender } = this.state;
 
         return (
             <form onSubmit={this.handleSubmit}>
@@ -71,7 +85,30 @@ class SignUpForm extends Component {
                         onChange={this.handleChange}
                     />
                 </label>
-                <button type="submit">Sign up as { login}</button>
+                <section>
+                    <h2>Choose your gender</h2>
+                    <label>
+                        Male
+                        <input
+                            type="radio"
+                            checked={gender === Gender.MALE}
+                            name="gender"
+                            value={Gender.MALE}
+                            onChange={this.handleChange}
+                        />
+                    </label>
+                    <label>
+                        Female
+                        <input
+                            type="radio"
+                            checked={gender === Gender.FEMALE}
+                            name="gender"
+                            value={Gender.FEMALE}
+                            onChange={this.handleChange}
+                        />
+                    </label>
+                </section>
+                <button type="submit" disabled={!agreed}>Sign up as { login }</button>
             </form>
         );
     }
